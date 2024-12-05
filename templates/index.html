@@ -2,10 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hand Gesture Recognition</title>
+    <title>Hand Recognition</title>
 </head>
 <body>
-    <h1>Hand Gesture Recognition</h1>
-    <img src="{{ url_for('video_feed') }}" width="640" height="480">
+    <h1>Choose a Feature</h1>
+    <form action="/select_feature" method="post">
+        <input type="radio" id="gesture" name="feature" value="gesture">
+        <label for="gesture">Hand Gesture Recognition</label><br>
+        <input type="radio" id="fingers" name="feature" value="fingers">
+        <label for="fingers">Hand Fingers Count Recognition</label><br><br>
+        <input type="submit" value="Submit">
+    </form>
 </body>
 </html>
