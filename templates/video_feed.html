@@ -2,12 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Feed</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .container {
+            text-align: center;
+        }
+        #videoContainer {
+            width: 80%;
+            max-width: 800px;
+            margin: auto;
+        }
+    </style>
 </head>
 <body>
-    <h1>Video Feed</h1>
-    <img src="{{ url_for('video_feed', feature=feature) }}">
-    <br>
-    <a href="/">Go Back</a>
+    <div class="container">
+        <h1>Video Feed</h1>
+        <div id="videoContainer">
+            <img src="{{ url_for('video_feed', feature=feature) }}" style="width: 100%;" />
+        </div>
+        <a href="/" class="btn btn-primary mt-3">Go Back</a>
+    </div>
 </body>
 </html>

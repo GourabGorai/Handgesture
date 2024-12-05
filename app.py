@@ -3,6 +3,7 @@ import cv2
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.models import load_model
+import mediapipe as mp
 
 app = Flask(__name__)
 
@@ -15,6 +16,11 @@ gestures = ['palm', 'l', 'fist', 'fist_moved', 'thumb', 'index', 'ok', 'palm_mov
 
 # Parameters for hand finger count model
 img_width, img_height = 128, 128
+
+# Initialize MediaPipe Hand model
+mp_hands = mp.solutions.hands
+hands = mp_hands.Hands(static_image_mode=False, max_num_hands=1, min_detection_confidence=0.5, min_tracking_confidence=0.5)
+mp_drawing = mp.solutions.drawing_utils
 
 def preprocess_gesture_image(image):
     """ Preprocess the image for gesture prediction. """
@@ -47,6 +53,16 @@ def predict_fingers(image):
     hand = 'Left' if predicted_class % 2 == 0 else 'Right'
     return fingers, hand
 
+def detect_hand(frame):
+    """ Detect the hand in the frame using MediaPipe. """
+    image_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    results = hands.process(image_rgb)
+    if results.multi_hand_landmarks:
+        for hand_landmarks in results.multi_hand_landmarks:
+            mp_drawing.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+        return True, frame
+    return False, frame
+
 def generate_frames(feature):
     """ Capture video frames from the camera and predict based on selected feature. """
     camera = cv2.VideoCapture(0)
@@ -55,12 +71,16 @@ def generate_frames(feature):
         if not success:
             break
         else:
-            if feature == 'gesture':
-                gesture = predict_gesture(frame)
-                cv2.putText(frame, f'Gesture: {gesture}', (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
-            elif feature == 'fingers':
-                fingers, hand = predict_fingers(frame)
-                cv2.putText(frame, f'Fingers: {fingers}, Hand: {hand}', (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
+            hand_detected, frame = detect_hand(frame)
+            if hand_detected:
+                if feature == 'gesture':
+                    gesture = predict_gesture(frame)
+                    cv2.putText(frame, f'Gesture: {gesture}', (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
+                elif feature == 'fingers':
+                    fingers, hand = predict_fingers(frame)
+                    cv2.putText(frame, f'Fingers: {fingers}, Hand: {hand}', (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
+            else:
+                cv2.putText(frame, 'No hand detected', (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
 
             ret, buffer = cv2.imencode('.jpg', frame)
             frame = buffer.tobytes()
