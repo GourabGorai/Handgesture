@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a0610f1-d632-41e6-9cac-bd90c442c21b" name="Changes" comment="Merged Feature">
+    <list default="true" id="3a0610f1-d632-41e6-9cac-bd90c442c21b" name="Changes" comment="Hand Detection">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/video_feed.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/video_feed.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +107,8 @@
       <workItem from="1733392652613" duration="1873000" />
       <workItem from="1733397726739" duration="427000" />
       <workItem from="1733399366314" duration="649000" />
-      <workItem from="1733406371323" duration="2636000" />
+      <workItem from="1733406371323" duration="2797000" />
+      <workItem from="1733451925055" duration="968000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -151,7 +150,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733399978601</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Hand Detection">
+      <option name="closed" value="true" />
+      <created>1733409234391</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1733409234391</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,12 +169,13 @@
     <MESSAGE value="new commit" />
     <MESSAGE value="Finger Count" />
     <MESSAGE value="Merged Feature" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merged Feature" />
+    <MESSAGE value="Hand Detection" />
+    <option name="LAST_COMMIT_MESSAGE" value="Hand Detection" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Handgesture$PreProcess.coverage" NAME="PreProcess Coverage Results" MODIFIED="1733313172266" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Handgesture$PDFDOCF.coverage" NAME="PDFDOCF Coverage Results" MODIFIED="1733394430175" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Handgesture$Handgesture.coverage" NAME="Handgesture Coverage Results" MODIFIED="1733408653168" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Handgesture$Handgesture.coverage" NAME="Handgesture Coverage Results" MODIFIED="1733452945519" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/Handgesture$Train.coverage" NAME="Train Coverage Results" MODIFIED="1733276894970" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Handgesture$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1733277829303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/Handgesture$Train2.coverage" NAME="Train2 Coverage Results" MODIFIED="1733318126677" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
