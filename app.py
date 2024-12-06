@@ -60,7 +60,7 @@ def predict_fingers(image):
 
 
 def detect_hand(frame):
-    """ Detect the hand in the frame using MediaPipe and return the square bounding box. """
+    """ Detect the hand in the frame using MediaPipe and return the larger square bounding box. """
     image_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     results = hands.process(image_rgb)
     if results.multi_hand_landmarks:
@@ -75,11 +75,12 @@ def detect_hand(frame):
             if x > x_max: x_max = x
             if y > y_max: y_max = y
 
-        # Calculate square bounding box
+        # Calculate square bounding box with padding
         box_size = max(x_max - x_min, y_max - y_min)
+        padding = int(box_size * 0.5)  # Add padding to make the box larger
         cx, cy = (x_min + x_max) // 2, (y_min + y_max) // 2
-        x_min, x_max = cx - box_size // 2, cx + box_size // 2
-        y_min, y_max = cy - box_size // 2, cy + box_size // 2
+        x_min, x_max = cx - box_size // 2 - padding, cx + box_size // 2 + padding
+        y_min, y_max = cy - box_size // 2 - padding, cy + box_size // 2 + padding
 
         # Ensure the bounding box is within the frame
         x_min = max(0, x_min)
