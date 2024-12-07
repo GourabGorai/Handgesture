@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3a0610f1-d632-41e6-9cac-bd90c442c21b" name="Changes" comment="Hand Detection">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hand_finger_model.h5" beforeDir="false" afterPath="$PROJECT_DIR$/hand_finger_model.h5" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +113,7 @@
       <workItem from="1733495074692" duration="692000" />
       <workItem from="1733499981687" duration="560000" />
       <workItem from="1733571387796" duration="672000" />
-      <workItem from="1733586148093" duration="461000" />
+      <workItem from="1733586148093" duration="1551000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -180,7 +179,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733456556693</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Hand Detection">
+      <option name="closed" value="true" />
+      <created>1733586769061</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1733586769061</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
