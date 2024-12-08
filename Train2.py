@@ -15,8 +15,9 @@ try:
 except ImportError:
     raise ImportError("Please install the Pillow library to use this script: pip install pillow")
 
-# Define the path
-dataset_dir = 'D:\\Android development\\archive (4)\\train'
+# Define the paths for training and testing datasets
+train_dataset_dir = 'D:\\Android development\\archive (4)\\train'
+test_dataset_dir = 'D:\\Android development\\archive (4)\\test'
 
 # Parameters
 img_width, img_height = 128, 128
@@ -33,39 +34,45 @@ def extract_label(filename):
     else:
         raise ValueError(f"Filename {filename} does not match expected pattern")
 
-# Load images and labels
-images = []
-labels = []
+# Function to load images and labels from a directory
+def load_images_labels(dataset_dir):
+    images = []
+    labels = []
+    for filename in os.listdir(dataset_dir):
+        if filename.endswith(".png"):
+            img_path = os.path.join(dataset_dir, filename)
+            try:
+                img = load_img(img_path, target_size=(img_width, img_height))
+                img_array = img_to_array(img)
+                images.append(img_array)
+                labels.append(extract_label(filename))
+            except Exception as e:
+                print(f"Error loading image {img_path}: {e}")
+    return np.array(images), np.array(labels)
 
-for filename in os.listdir(dataset_dir):
-    if filename.endswith(".png"):
-        img_path = os.path.join(dataset_dir, filename)
-        try:
-            img = load_img(img_path, target_size=(img_width, img_height))
-            img_array = img_to_array(img)
-            images.append(img_array)
-            labels.append(extract_label(filename))
-        except Exception as e:
-            print(f"Error loading image {img_path}: {e}")
+# Load training images and labels
+train_images, train_labels = load_images_labels(train_dataset_dir)
 
-# Convert to numpy arrays
-images = np.array(images)
-labels = np.array(labels)
+# Load testing images and labels
+test_images, test_labels = load_images_labels(test_dataset_dir)
 
 # Check if images and labels are loaded correctly
-print(f"Loaded {len(images)} images and {len(labels)} labels.")
+print(f"Loaded {len(train_images)} training images and {len(train_labels)} training labels.")
+print(f"Loaded {len(test_images)} testing images and {len(test_labels)} testing labels.")
 
-if len(images) == 0 or len(labels) == 0:
-    raise ValueError("No images or labels loaded. Please check the dataset directory and file naming conventions.")
+if len(train_images) == 0 or len(train_labels) == 0 or len(test_images) == 0 or len(test_labels) == 0:
+    raise ValueError("No images or labels loaded. Please check the dataset directories and file naming conventions.")
 
 # Normalize images
-images = images / 255.0
+train_images = train_images / 255.0
+test_images = test_images / 255.0
 
 # Convert labels to categorical
-labels = to_categorical(labels, num_classes=num_classes)
+train_labels = to_categorical(train_labels, num_classes=num_classes)
+test_labels = to_categorical(test_labels, num_classes=num_classes)
 
-# Split into training and test sets
-X_train, X_test, y_train, y_test = train_test_split(images, labels, test_size=0.2, random_state=42)
+# Split training data into training and validation sets
+X_train, X_val, y_train, y_val = train_test_split(train_images, train_labels, test_size=0.2, random_state=42)
 
 # Build the model
 model = Sequential([
@@ -92,8 +99,12 @@ model.compile(
 history = model.fit(
     X_train, y_train,
     epochs=25,
-    validation_data=(X_test, y_test)
+    validation_data=(X_val, y_val)
 )
+
+# Evaluate the model on the test set
+test_loss, test_accuracy = model.evaluate(test_images, test_labels)
+print(f"Test accuracy: {test_accuracy * 100:.2f}%")
 
 # Save the model
 model.save('hand_finger_model.h5')
